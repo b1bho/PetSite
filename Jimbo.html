@@ -5,24 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jimbo – Scheda del Cane</title>
   <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --card-color: white;
+      --text-color: #333;
+      --accent-color: #0066cc;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
+      background: var(--bg-color);
+      color: var(--text-color);
       margin: 0;
       padding: 0;
     }
 
     .container {
-      max-width: 500px;
+      max-width: 700px;
       margin: 50px auto;
       padding: 2rem;
-      background: white;
+      background: var(--card-color);
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    h1 {
+    h1, h2, h3 {
       text-align: center;
       color: #444;
     }
@@ -35,14 +42,14 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    .info {
+    .info, .contact, .extra, .calendar, .medical, .growth, .map, .pdf-button {
       margin-top: 1.5rem;
       line-height: 1.6;
     }
 
-    .info strong {
+    .info strong, .extra strong {
       display: inline-block;
-      width: 130px;
+      width: 150px;
       color: #666;
     }
 
@@ -53,10 +60,25 @@
     }
 
     .contact a {
-      color: #0066cc;
+      color: var(--accent-color);
       text-decoration: none;
       display: block;
       margin-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 0.5rem;
+      text-align: center;
     }
 
     .footer {
@@ -65,27 +87,99 @@
       font-size: 0.85rem;
       color: #999;
     }
+
+    #theme-toggle {
+      display: block;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="jimbo-info">
     <h1>🐾 Scheda di Jimbo</h1>
     <img src="Jimbo.jpg" alt="Foto di Jimbo" class="dog-photo">
+
     <div class="info">
       <p><strong>Nome:</strong> Jimbo</p>
       <p><strong>Razza:</strong> Pitt x Russel</p>
       <p><strong>Età:</strong> 4 anni</p>
       <p><strong>Caratteristiche:</strong> Fa fufù 😄</p>
     </div>
+
+    <div class="extra">
+      <h3>Dati Aggiuntivi</h3>
+      <p><strong>Statura:</strong> 38 cm</p>
+      <p><strong>Interessi:</strong> Correre, scavare, inseguire lucertole 🦎</p>
+    </div>
+
+    <div class="calendar">
+      <h3>📅 Vaccinazioni</h3>
+      <table>
+        <tr><th>Data</th><th>Tipo</th><th>Prossimo Richiamo</th></tr>
+        <tr><td>12/08/2024</td><td>Lesmaniosi</td><td>01/08/2025</td></tr>
+        <tr><td>01/02/2025</td><td>Polivalente</td><td>01/02/2026</td></tr>
+        <tr><td>01/02/2025</td><td>Leptospirosi</td><td>01/02/2026</td></tr>
+      </table>
+    </div>
+
+    <div class="medical">
+      <h3>🩺 Storico Medico</h3>
+      <ul>
+        <li>10/05/2025 – Rimozione zecca</li>
+        <li>05/07/2025 – Gastroenterite trattata</li>
+      </ul>
+    </div>
+
+    <div class="growth">
+      <h3>📈 Crescita e Peso</h3>
+      <table>
+        <tr><th>Data</th><th>Peso</th></tr>
+        <tr><td>01/01/2023</td><td>16.2 kg</td></tr>
+        <tr><td>01/07/2023</td><td>16.5 kg</td></tr>
+        <tr><td>01/01/2024</td><td>17.4 kg</td></tr>
+        <tr><td>01/01/2025</td><td>16.4 kg</td></tr>
+      </table>
+    </div>
+
+   <div class="map">
+      <h3>📍 Veterinario di Fiducia</h3>
+      <a href="https://maps.app.goo.gl/HvCvbgQdb6sr7BDk8" target="_blank">Visualizza su Google Maps</a>
+    </div>
+
     <div class="contact">
       <h3>Contatti del proprietario</h3>
       <a href="tel:+393314949346">📞 331 4949346</a>
       <a href="mailto:gabrieleb1bho@gmail.com">✉️ gabrieleb1bho@gmail.com</a>
       <a href="https://instagram.com/b1bho90124" target="_blank">📸 @b1bho90124</a>
     </div>
+
+    <div class="pdf-button">
+      <h3>📄 Esporta</h3>
+      <button onclick="window.print()">Scarica come PDF</button>
+    </div>
+
+    <button id="theme-toggle">🎨 Cambia Tema</button>
+
     <div class="footer">
       Ultimo aggiornamento: Luglio 2025
     </div>
   </div>
+
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const root = document.documentElement;
+      const isLight = root.style.getPropertyValue('--bg-color') === '#f9f9f9';
+      root.style.setProperty('--bg-color', isLight ? '#1e1e1e' : '#f9f9f9');
+      root.style.setProperty('--card-color', isLight ? '#2c2c2c' : 'white');
+      root.style.setProperty('--text-color', isLight ? '#f9f9f9' : '#333');
+      root.style.setProperty('--accent-color', isLight ? '#4fc3f7' : '#0066cc');
+    });
+  </script>
 </body>
 </html>
